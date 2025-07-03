@@ -3,9 +3,12 @@
 set "INCLUDE=%LIBRARY_INC%;%LIBRARY_INC%\GL;%INCLUDE%"
 set "LIB=%LIBRARY_LIB%;%LIB%"
 
+echo "%LIBRARY_INC%"
 cd /d "%SRC_DIR%\src"
 
-cl /c /DWIN32 /DOPENGL_10=1 /I"GL" /I"%LIBRARY_INC%" /I"%LIBRARY_INC%\GL" *.c
+dir /A "%PREFIX%/Library/ucrt64/include/GL"
+
+cl /c /DWIN32 /DOPENGL_10=1 /I"GL" /I"%LIBRARY_INC%" /I"%LIBRARY_INC%\GL" /I"%PREFIX%/Library/ucrt64/include/GL" *.c
 
 if %ERRORLEVEL% neq 0 (
     echo Compilation failed!
